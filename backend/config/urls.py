@@ -1,0 +1,14 @@
+from django.contrib import admin
+from django.http import JsonResponse
+from django.urls import path
+
+
+def health_check(request):
+    """Return service liveness without exposing configuration or database data."""
+    return JsonResponse({"status": "ok", "service": "nugabest-crm-api"})
+
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("api/v1/health/", health_check, name="health-check"),
+]
